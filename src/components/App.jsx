@@ -17,8 +17,10 @@ export default class App extends React.Component {
     this.setState({ contacts: listContacts });
   }
 
-  componentDidUpdate() {
-    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contact !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
   }
 
   addContact = contact => {
